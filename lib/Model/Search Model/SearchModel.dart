@@ -17,7 +17,7 @@ class SearchModel {
   SearchModel.fromJson(dynamic json) {
     _success = json['success'];
     _message = json['message'];
-    _datas = json['datas'] != null ? Datas.fromJson(json['datas']) : null;
+    _datas = json['data'] != null ? Datas.fromJson(json['data']) : null;
   }
   bool? _success;
   String? _message;
@@ -32,7 +32,7 @@ class SearchModel {
     map['success'] = _success;
     map['message'] = _message;
     if (_datas != null) {
-      map['datas'] = _datas?.toJson();
+      map['data'] = _datas?.toJson();
     }
     return map;
   }

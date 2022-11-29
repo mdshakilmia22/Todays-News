@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:prothom_alo/Config/news_config.dart';
+import 'package:prothom_alo/Model/Category%20Details/CategoryDetailsModel.dart';
 import '../Model/Category Model/CategoryNewModel.dart';
 import '../Model/LatestNews/LatestNewsModel.dart';
 import '../Model/Search Model/SearchModel.dart';
@@ -42,7 +43,7 @@ class NewsPaperClass{
   }
 
   Future<SearchModel> getSearch()async{
-    var response= await http.get(Uri.parse(NewsConfig.newsurl + NewsConfig.search));
+    var response= await http.post(Uri.parse(NewsConfig.newsurl + NewsConfig.search));
     if(response.statusCode==200){
       return SearchModel.fromJson(jsonDecode(response.body));
     }
@@ -50,5 +51,15 @@ class NewsPaperClass{
       throw Exception('Error');
     }
   }
+ Future<CategoryDetailsModel> getCategoryNewsdetails(String id)async{
+    var response= await http.get(Uri.parse('${NewsConfig.newsurl + NewsConfig.categoryDetails}/$id'));
+    var data= jsonDecode(response.body);
+    if(response.statusCode==200){
+      return CategoryDetailsModel.fromJson(data);
+    }
+    else{
+      throw Exception('Error');
+    }
+ }
 
 }

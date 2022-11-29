@@ -98,6 +98,8 @@ class Datas {
   int? get to => _to;
   int? get total => _total;
 
+
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['current_page'] = _currentPage;

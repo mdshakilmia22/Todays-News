@@ -45,7 +45,6 @@ class _CategoryPageState extends State<CategoryPage> {
                      children: [
                        Column(
                        children: [
-
                             Container(
                              height: MediaQuery.of(context).size.height/5,
                              width: MediaQuery.of(context).size.width/2.3,
