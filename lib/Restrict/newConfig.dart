@@ -42,8 +42,10 @@ class NewsPaperClass{
 
   }
 
-  Future<SearchModel> getSearch()async{
-    var response= await http.post(Uri.parse(NewsConfig.newsurl + NewsConfig.search));
+  Future<SearchModel> getSearch(String item)async{
+    var response= await http.post(Uri.parse(NewsConfig.newsurl + NewsConfig.search),body: <String, String>{
+      'search' : item
+    });
     if(response.statusCode==200){
       return SearchModel.fromJson(jsonDecode(response.body));
     }
