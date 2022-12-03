@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:prothom_alo/Model/Sing_Up/SingUpModels.dart';
@@ -10,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import '../Restrict/newConfig.dart';
 import '../Screen/spalash.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -317,9 +319,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ElevatedButton(
                 onPressed: () async {
                   final prefs = await SharedPreferences.getInstance();
-                  prefs
+                  String? token = prefs.getString('token');
+                  var status = await NewsPaperClass().signOut(token ?? '');
+                  
+                 status ? prefs
                       .setString('token', '')
-                      .then((value) => SpalashScreen().launch(context));
+                      .then((value) => SpalashScreen().launch(context)) : EasyLoading.showError('Error');
+
                 },
                 child: const Text(
                   'Log Out',

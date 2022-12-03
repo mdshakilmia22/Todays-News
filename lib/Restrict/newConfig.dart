@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:prothom_alo/Config/config.dart';
 import 'package:prothom_alo/Config/news_config.dart';
 import 'package:prothom_alo/Model/Category%20Details/CategoryDetailsModel.dart';
 import '../Model/Category Model/CategoryNewModel.dart';
@@ -53,6 +54,20 @@ class NewsPaperClass{
       throw Exception('Error');
     }
   }
+
+  Future<bool> signOut(String token)async{
+    var response= await http.get(Uri.parse(Config.serverUrl + Config.logoutProfile),headers: <String, String>{
+      'Authorization' : 'Bearer $token'
+    });
+    if(response.statusCode==200){
+      return true;
+    }
+    else{
+      throw Exception('Error');
+    }
+  }
+
+
  Future<CategoryDetailsModel> getCategoryNewsdetails(String id)async{
     var response= await http.get(Uri.parse('${NewsConfig.newsurl + NewsConfig.categoryDetails}/$id'));
     var data= jsonDecode(response.body);
