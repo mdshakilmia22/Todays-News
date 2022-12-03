@@ -61,6 +61,7 @@ class NewsPaperClass{
     });
     if(response.statusCode==200){
       return true;
+
     }
     else{
       throw Exception('Error');
