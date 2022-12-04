@@ -23,7 +23,7 @@ class _CategoryDetailsPageState extends State<CategoryDetailsPage> {
             return Scaffold(
               body: SingleChildScrollView(
                 child: ListView.builder(
-                   physics: NeverScrollableScrollPhysics(),
+                   physics: const NeverScrollableScrollPhysics(),
                    shrinkWrap: true,
                    itemCount: snapshot.data?.datas?.data?.length ?? 0,
                     itemBuilder: (context,index){
