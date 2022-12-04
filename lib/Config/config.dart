@@ -6,4 +6,5 @@ class Config{
   static const String singIn='user_login';
   static const String getdata='user_logout';
   static const String updateProfile='update_profile';
+  static const String logoutProfile = 'user_logout';
 }
