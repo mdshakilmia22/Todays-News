@@ -22,7 +22,17 @@ class NewCard extends StatelessWidget {
 
               Expanded(
                   flex: 2,
-                  child: Image.network(image)),
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(image))
+                    ),
+                  ),),
 
 
             ],

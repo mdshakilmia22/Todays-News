@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:prothom_alo/Model/Search%20Model/SearchModel.dart';
 import 'package:prothom_alo/Restrict/newConfig.dart';
-
 import '../Extract Widget/feature.dart';
 import '../Extract Widget/newscard.dart';
 import 'news_details.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage();
 
@@ -46,8 +45,8 @@ class _SearchPageState extends State<SearchPage> {
                         await NewsPaperClass().getSearch(search!);
                       }),
                       hintText: 'Search',
-                      suffixIcon: Icon(Icons.mic,color: Colors.grey,),
-                      border: OutlineInputBorder(
+                      suffixIcon: const Icon(Icons.mic,color: Colors.grey,),
+                      border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
                     ),
@@ -87,8 +86,8 @@ class _SearchPageState extends State<SearchPage> {
                     return const Center(child: Text('Waiting For your Search Query'),);
                   }
                   else{
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 250),
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 250),
                       child: Center(child: CircularProgressIndicator(),),
                     );
                   }

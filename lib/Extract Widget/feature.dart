@@ -8,16 +8,29 @@ class FeaturePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(image),
+        Container(
+          height: 230,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(0),
+              bottomLeft: Radius.circular(0),
+            ),
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(image))
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(title,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),maxLines: 2,overflow: TextOverflow.ellipsis,),
+          child: Text(title,style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,fontFamily: 'Merriweather'),maxLines: 2,overflow: TextOverflow.ellipsis,),
 
         ),
         Divider(
           thickness: 1,
           color: Colors.black,
-          height: 20,
+          height: 30,
         )
       ],
     );

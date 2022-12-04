@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:prothom_alo/Config/riverpod.dart';
 import 'package:prothom_alo/Model/LatestNews/LatestNewsModel.dart';
 import 'package:prothom_alo/Restrict/newConfig.dart';
 import 'package:prothom_alo/widget/news_details.dart';
@@ -35,37 +37,37 @@ class _LatestNewsPageState extends State<LatestNewsPage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: FutureBuilder<LatestNewsModel>(
-            future: NewsPaperClass().latestNews(),
-            builder: (context, snapshot){
-              if(snapshot.hasData){
-                return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data?.datas?.data?.length ?? 0,
-                    itemBuilder: (context,index){
-                      return Column(
-                        children: [
-                          FeaturePage(
-                              image: snapshot.data?.datas?.data?[index].image?[0] ?? '',
-                              title: snapshot.data?.datas?.data?[index].title ?? '').visible(index==0),
+        child: Consumer(
+            builder: (_,ref,watch){
+              AsyncValue<LatestNewsModel> latest=ref.watch(latestProvider);
+              return latest.when(
+                  data: (data){
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: data.datas?.data?.length ?? 0,
+                        itemBuilder: (context,index){
+                          return Column(
+                            children: [
+                              FeaturePage(
+                                  image: data.datas?.data?[index].image?[0] ?? '',
+                                  title: data.datas?.data?[index].title ?? '').visible(index==0),
 
-                          NewCard(
-                              image: snapshot.data?.datas?.data?[index].image?[0] ?? '',
-                              title: snapshot.data?.datas?.data?[index].title ?? '',
-                              date: snapshot.data?.datas?.data?[index].date ?? '',
-                          ).visible(index !=0),
+                              NewCard(
+                                image: data.datas?.data?[index].image?[0] ?? '',
+                                title: data.datas?.data?[index].title ?? '',
+                                date: data.datas?.data?[index].date ?? '',
+                              ).visible(index !=0),
 
-                        ],
-                      ).onTap(() => DetailsPage(newsid: snapshot.data!.datas!.data![index].id.toString(),).launch(context));
-                    });
-              }
-              else{
-                return Padding(
-                  padding: const EdgeInsets.only(top: 250),
-                  child: Center(child: CircularProgressIndicator(),),
-                );
-              }
+                            ],
+                          ).onTap(() => DetailsPage(newsid: data.datas!.data![index].id.toString(),).launch(context));
+                        });
+                  },
+                  error: (e,stack){
+                    return Text('Error');
+                  }, loading: (){
+                    return Center(child: CircularProgressIndicator(),);
+              });
             }),
       ),
     );
