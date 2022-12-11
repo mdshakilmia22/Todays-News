@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:prothom_alo/Restrict/Auth_repo.dart';
 import 'package:prothom_alo/widget/profile.dart';
+
+import '../../Repository/Auth_repo.dart';
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 

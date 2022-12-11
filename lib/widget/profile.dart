@@ -5,13 +5,12 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:prothom_alo/Model/Sing_Up/SingUpModels.dart';
-import 'package:prothom_alo/Restrict/Auth_repo.dart';
 import 'package:prothom_alo/widget/Sub%20Widget/edit_profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-import '../Restrict/newConfig.dart';
+import '../Repository/newConfig.dart';
 import '../Screen/spalash.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -23,19 +22,23 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
-  File? _image;
+  String pictureUrl='https://scontent.fdac136-1.fna.fbcdn.net/v/t1.6435-9/143607271_1076441342819800_4674677155533029637_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=174925&_nc_eui2=AeHHH7_Sv-gVjsWoNoKRNShK2rgPHYlGy77auA8diUbLvrwsbsZ4KsDaNdhXHvGYAij5HUg5bXLhh_cmF9rbYTr8&_nc_ohc=9hquq0IrtRMAX_6IomI&_nc_ht=scontent.fdac136-1.fna&oh=00_AfCKfwlwtmmGaAbboxgJDrdLizKyalWpPnULRjE1inMkpw&oe=63A91EFA';
 
-  Future getImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-      final imageTemporary = File(image.path);
-      setState(() {
-        _image = imageTemporary;
-      });
-    } on PlatformException catch (e) {
-      print('Field to Pic Image: $e');
-    }
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
+  File imageFile = File('No Data');
+  String imagePath = 'No Data';
+
+  void getImage() async {
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = File(image?.path ?? 'No Data');
+      imagePath = image?.path ?? 'No Data';
+    });
+    print(pictureUrl);
+    setState(() {
+      // image.path.isEmptyOrNull ? imageFile = File('No Data') : imageFile = File(image.path);
+    });
   }
   Future<void> _makePhoneCall(String phoneNumber) async {
     final Uri launchUri = Uri(
@@ -44,8 +47,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
     await launchUrl(launchUri);
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,11 +105,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       backgroundColor: Colors.green,
                       backgroundImage:
                       NetworkImage(
-                          'https://scontent.fdac136-1.fna.fbcdn.net/v/t1.6435-9/143607271_1076441342819800_4674677155533029637_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=174925&_nc_eui2=AeHHH7_Sv-gVjsWoNoKRNShK2rgPHYlGy77auA8diUbLvrwsbsZ4KsDaNdhXHvGYAij5HUg5bXLhh_cmF9rbYTr8&_nc_ohc=9hquq0IrtRMAX_6IomI&_nc_ht=scontent.fdac136-1.fna&oh=00_AfCKfwlwtmmGaAbboxgJDrdLizKyalWpPnULRjE1inMkpw&oe=63A91EFA'),
+                          ''),
 
                     ),
                       InkWell(
-                        onTap: ()=>getImage(ImageSource.gallery),
+                        // onTap: ()=>getImage(ImageSource.gallery),
                         child: CircleAvatar(
                           backgroundColor: Colors.grey[200],
                           child:  Icon(Icons.camera_alt,color: Colors.black,size: 25,),
@@ -120,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 220, left: 310),
                   child: InkWell(
-                    onTap: ()=>getImage(ImageSource.gallery),
+                    // onTap: ()=>getImage(ImageSource.gallery),
                     child: CircleAvatar(
                       backgroundColor: Colors.grey[100],
                       child: const Icon(Icons.camera_alt,color: Colors.black,),

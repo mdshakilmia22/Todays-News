@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:prothom_alo/Model/Search%20Model/SearchModel.dart';
-import 'package:prothom_alo/Restrict/newConfig.dart';
 import '../Extract Widget/feature.dart';
 import '../Extract Widget/newscard.dart';
+import '../Repository/newConfig.dart';
 import 'news_details.dart';
 
 class SearchPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               child: Card(
                 child: SizedBox(
                   height: 60,
@@ -41,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.search,color: Colors.grey,size: 25,).onTap(()async{
+                      prefixIcon: const Icon(Icons.search,color: Colors.grey,size: 25,).onTap(()async{
                         await NewsPaperClass().getSearch(search!);
                       }),
                       hintText: 'Search',
@@ -63,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
                     } else{
                       return ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: snapshot.data?.datas?.data?.length ?? 0,
                           itemBuilder: (context,index){
                             return Column(

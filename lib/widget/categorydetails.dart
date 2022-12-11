@@ -6,7 +6,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:prothom_alo/Config/riverpod.dart';
 import 'package:prothom_alo/Model/Category%20Details/CategoryDetailsModel.dart';
 import 'package:prothom_alo/NewsDetails/NewsDetailsModel.dart';
-import 'package:prothom_alo/Restrict/newConfig.dart';
 import 'package:prothom_alo/widget/categorylast.dart';
 
 class CategoryDetailsPage extends StatefulWidget {

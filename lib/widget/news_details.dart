@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prothom_alo/Extract%20Widget/feature.dart';
-import 'package:prothom_alo/Restrict/newConfig.dart';
 import 'package:intl/intl.dart';
 import '../Config/riverpod.dart';
 import '../NewsDetails/NewsDetailsModel.dart';
@@ -50,7 +49,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(Bidi.stripHtmlIfNeeded(details.data?.description ?? ''),style: TextStyle(color: Colors.black,fontSize: 16.0),),
-                          )
+                          ),
                         ],
                       ),
                     )

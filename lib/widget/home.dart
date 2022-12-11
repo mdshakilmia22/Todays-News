@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:prothom_alo/Config/riverpod.dart';
 import 'package:prothom_alo/Model/LatestNews/LatestNewsModel.dart';
-import 'package:prothom_alo/Restrict/newConfig.dart';
 import 'package:prothom_alo/widget/news_details.dart';
 import '../Extract Widget/feature.dart';
 import '../Extract Widget/newscard.dart';
@@ -25,8 +24,8 @@ class _LatestNewsPageState extends State<LatestNewsPage> {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset('images/timezone.png',height: 25,width: 25),
         ),
-        title:  Padding(
-          padding: const EdgeInsets.all(0),
+        title:  const Padding(
+          padding: EdgeInsets.all(0),
           child: Text('Todays Time',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.red,fontFamily: 'Merriweather'),),
         ),
         actions: [
@@ -44,7 +43,7 @@ class _LatestNewsPageState extends State<LatestNewsPage> {
                   data: (data){
                     return ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: data.datas?.data?.length ?? 0,
                         itemBuilder: (context,index){
                           return Column(
@@ -64,9 +63,12 @@ class _LatestNewsPageState extends State<LatestNewsPage> {
                         });
                   },
                   error: (e,stack){
-                    return Text('Error');
+                    return const Text('Error');
                   }, loading: (){
-                    return Center(child: CircularProgressIndicator(),);
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 300),
+                      child: Center(child: CircularProgressIndicator(),),
+                    );
               });
             }),
       ),

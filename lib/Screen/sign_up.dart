@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:prothom_alo/Restrict/Auth_repo.dart';
 import 'package:prothom_alo/Screen/sing_in.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../Repository/Auth_repo.dart';
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
 
@@ -215,6 +216,7 @@ class _SignupPageState extends State<SignupPage> {
                             var status= await AuthReop().SingUpwithEmail(namecontroller.text, latnamecontroller.text, emailcontroller.text, phonecontroller.text, passwordcontoller.text, confarmpasswordcontroller.text);
                             if(status){
                               EasyLoading.showSuccess('SingUp Succesful');
+                              SingInPage().launch(context);
                             }
                             else{
                               EasyLoading.showError('SingUp Filled');

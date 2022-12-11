@@ -5,5 +5,6 @@ class NewsConfig{
   static const String newsDetails='news_details';
   static const String categoryNews='news_categories';
   static const String search='search_news';
-
+  static const String postComment='news_comment';
+  static const String getComment='news_comments';
 }

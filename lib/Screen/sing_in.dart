@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:prothom_alo/Restrict/Auth_repo.dart';
 import 'package:prothom_alo/Screen/NewsPaper.dart';
 import 'package:prothom_alo/Screen/sign_up.dart';
+
+import '../Repository/Auth_repo.dart';
 
 class SingInPage extends StatefulWidget {
   const SingInPage({Key? key}) : super(key: key);
